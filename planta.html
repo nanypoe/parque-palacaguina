@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planta - Parque de Flora</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="bg-success text-white py-3">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col">
+            <a href="index.html" class="btn btn-outline-light btn-sm"
+              >← Volver al listado</a
+            >
+          </div>
+          <div class="col text-center">
+            <h1 class="h4 mb-0" id="nombre-planta">Cargando...</h1>
+          </div>
+          <div class="col text-end">
+            <small id="nombre-cientifico"></small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido de la Planta -->
+    <div class="container mt-4">
+      <!-- Imagen y Info Básica -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <img
+            id="imagen-planta"
+            src=""
+            alt=""
+            class="img-fluid rounded shadow"
+            style="max-height: 400px; width: 100%; object-fit: cover"
+          />
+          <div class="mt-3 text-center">
+            <small class="text-muted"
+              >Escanea el código QR en el parque para ver esta
+              información</small
+            >
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">🔍 Información Taxonómica</h5>
+            </div>
+            <div class="card-body">
+              <div class="row small">
+                <div class="col-6 mb-2">
+                  <strong>Reino:</strong><br />
+                  <span id="info-reino">-</span>
+                </div>
+                <div class="col-6 mb-2">
+                  <strong>División:</strong><br />
+                  <span id="info-division">-</span>
+                </div>
+                <div class="col-6 mb-2">
+                  <strong>Orden:</strong><br />
+                  <span id="info-orden">-</span>
+                </div>
+                <div class="col-6 mb-2">
+                  <strong>Familia:</strong><br />
+                  <span id="info-familia">-</span>
+                </div>
+                <div class="col-12 mb-2">
+                  <strong>Especie:</strong><br />
+                  <span id="info-especie">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Descripción Corta -->
+          <div class="card mt-3">
+            <div class="card-body">
+              <h6>🌿 Descripción</h6>
+              <p id="descripcion-corta" class="mb-0">Cargando...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información Detallada con Acordeones -->
+      <div class="row">
+        <div class="col-12">
+          <div class="accordion" id="acordeon-info">
+            <!-- Descripción Larga -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#descripcion-larga"
+                >
+                  📖 Descripción Completa
+                </button>
+              </h2>
+              <div
+                id="descripcion-larga"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#acordeon-info"
+              >
+                <div class="accordion-body">
+                  <p id="texto-descripcion-larga">Cargando...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Usos -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#usos"
+                >
+                  🌾 Usos y Aplicaciones
+                </button>
+              </h2>
+              <div
+                id="usos"
+                class="accordion-collapse collapse"
+                data-bs-parent="#acordeon-info"
+              >
+                <div class="accordion-body">
+                  <p id="texto-usos">Cargando...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Distribución -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#distribucion"
+                >
+                  🌎 Distribución Geográfica
+                </button>
+              </h2>
+              <div
+                id="distribucion"
+                class="accordion-collapse collapse"
+                data-bs-parent="#acordeon-info"
+              >
+                <div class="accordion-body">
+                  <p id="texto-distribucion">Cargando...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegación entre Plantas -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body text-center">
+              <div class="btn-group">
+                <button id="btn-anterior" class="btn btn-outline-success">
+                  ← Anterior
+                </button>
+                <a href="index.html" class="btn btn-success"
+                  >Ver Todas las Plantas</a
+                >
+                <button id="btn-siguiente" class="btn btn-outline-success">
+                  Siguiente →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+      // Debug temporal
+      console.log("URL actual:", window.location.href);
+      console.log(
+        "Parámetros:",
+        new URLSearchParams(window.location.search).get("planta")
+      );
+    </script>
+  </body>
+</html>

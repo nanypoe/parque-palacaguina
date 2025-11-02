@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Parque Flora</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Estilos personalizados -->
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h1 class="text-center mb-4">🌿 Administrar Plantas</h1>
+
+      <!-- Formulario para agregar/editar plantas -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 id="form-title">Agregar Nueva Planta</h5>
+        </div>
+        <div class="card-body">
+          <form id="planta-form">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="id" class="form-label">ID único (para URL)</label>
+                  <input type="text" class="form-control" id="id" required />
+                  <div class="form-text">
+                    Ejemplo: neem, nancite (sin espacios, minúsculas)
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nombre_comun" class="form-label"
+                    >Nombre común</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre_comun"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="nombre_cientifico" class="form-label"
+                    >Nombre científico</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre_cientifico"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="familia" class="form-label">Familia</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="familia"
+                    required
+                  />
+                </div>
+
+                <!-- CAMPOS NUEVOS DENTRO DEL COL-MD-6 -->
+                <div class="mb-3">
+                  <label for="reino" class="form-label">Reino</label>
+                  <input type="text" class="form-control" id="reino" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="orden" class="form-label">Orden</label>
+                  <input type="text" class="form-control" id="orden" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="especie" class="form-label">Especie</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="especie"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="division" class="form-label">División</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="division"
+                    required
+                  />
+                </div>
+              </div>
+              <!-- CIERRE DEL COL-MD-6 -->
+
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="imagen" class="form-label">Imagen</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="imagen"
+                    accept="image/*"
+                  />
+                  <div class="form-text">Sube una imagen de la planta</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="descripcion_corta" class="form-label"
+                    >Descripción corta</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="descripcion_corta"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="descripcion_larga" class="form-label"
+                >Descripción larga</label
+              >
+              <textarea
+                class="form-control"
+                id="descripcion_larga"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="usos" class="form-label">Usos</label>
+              <textarea
+                class="form-control"
+                id="usos"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="distribucion" class="form-label">Distribución</label>
+              <textarea
+                class="form-control"
+                id="distribucion"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success">
+                Guardar Planta
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                id="btn-cancelar"
+                style="display: none"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>🔄 Gestión de Archivos JSON</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <button
+                class="btn btn-outline-primary w-100"
+                onclick="descargarJSON({plantas: plantas})"
+              >
+                📥 Descargar JSON Actual
+              </button>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="cargar-json"
+                  accept=".json"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  onclick="document.getElementById('cargar-json').click()"
+                >
+                  📤 Cargar JSON
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de plantas existentes -->
+      <div class="card">
+        <div class="card-header">
+          <h5>Plantas Existentes</h5>
+        </div>
+        <div class="card-body">
+          <div id="plantas-lista" class="row">
+            <!-- Aquí se cargarán las plantas dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Nuestro script del admin -->
+    <script src="js/admin.js"></script>
+  </body>
+</html>
